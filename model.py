@@ -8,6 +8,8 @@ from torch.autograd import Variable
 import random
 import numpy as np
 from arguments import get_args
+import secrets
+
 args = get_args()
 
 class Encoder(nn.Module):
@@ -174,7 +176,7 @@ def cls_train(graphsage, train_x, train_y):
         batch_y = train_y[:128]
         # random.shuffle(train)
         c = list(zip(train_x, train_y))
-        random.shuffle(c)
+        secrets.SystemRandom().shuffle(c)
         train_x, train_y = zip(*c)
 
         optimizer.zero_grad()

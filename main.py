@@ -8,7 +8,6 @@ from torch.autograd import Variable
 
 import numpy as np
 import time
-import random
 from sklearn.metrics import f1_score, roc_auc_score
 from collections import defaultdict
 from sklearn import manifold
@@ -23,11 +22,12 @@ from env import Env
 from arguments import get_args
 from collections import defaultdict
 import scipy.sparse as sp
+import secrets
 
 
 def extract_indices(label_array, k, label):
     indices = [i for i in range(len(label_array)) if label_array[i] == label]
-    return random.sample(indices, k) if len(indices) >= k else indices
+    return secrets.SystemRandom().sample(indices, k) if len(indices) >= k else indices
 
 
 def data_spilit(labels, num_cls, args):
@@ -187,7 +187,7 @@ def load_data(path):
 
 def run_cora(args):
     np.random.seed(1)
-    random.seed(1)
+    secrets.SystemRandom().seed(1)
 
 
     file_path = 'dataset/' + args.dataset +'.pt'
