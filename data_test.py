@@ -1,9 +1,10 @@
-import random
 
 import numpy as np
 import torch
 from torch import nn
 from collections import defaultdict
+import secrets
+
 np.set_printoptions(threshold=np.inf)
 
 def data_spilit(labels, num_cls):
@@ -100,7 +101,7 @@ def load_cora():
 
 def run_cora():
     np.random.seed(1)
-    random.seed(1)
+    secrets.SystemRandom().seed(1)
     num_cls = 7
     feat_data, labels, adj_lists = load_cora()
     features = nn.Embedding(2708, 1433)

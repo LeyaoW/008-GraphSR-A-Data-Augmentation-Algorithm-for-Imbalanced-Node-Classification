@@ -1,7 +1,6 @@
 import math
 
 import numpy as np
-import random
 import torch
 from sklearn import metrics
 from collections import deque
@@ -12,6 +11,7 @@ from model import Encoder, MeanAggregator, SupervisedGraphSage
 from collections import defaultdict
 import torch.nn.functional as F
 import time
+import secrets
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -310,7 +310,7 @@ class Env:
             batch_y = train_y[:128]
             # random.shuffle(train)
             c = list(zip(train_x, train_y))
-            random.shuffle(c)
+            secrets.SystemRandom().shuffle(c)
             train_x, train_y = zip(*c)
 
             optimizer.zero_grad()
